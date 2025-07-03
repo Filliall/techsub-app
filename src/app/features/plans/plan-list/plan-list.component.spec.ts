@@ -3,24 +3,29 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
 import { PlanListComponent } from './plan-list.component';
-import { SubscriptionsService } from '../../../api/services';
+import { PlansService } from '../../../api/services';
+import { PlanDto } from '../../../api/models';
 
 describe('PlanListComponent', () => {
   let component: PlanListComponent;
   let fixture: ComponentFixture<PlanListComponent>;
-  let subscriptionPlanServiceMock: Partial<SubscriptionsService>;
+  let plansServiceMock: Partial<PlansService>;
 
   beforeEach(async () => {
-    subscriptionPlanServiceMock = {
-      apiSubscriptionsCurrentGet$Json: () => of([]),
+    plansServiceMock = {
+      apiPlansGet$Json: () => of<PlanDto[]>([]), // Simulate the API call returning an empty array of plans
     };
+
+    // It's good practice to mock the actual service used by the component.
+    // The PlanListComponent uses PlansService, not SubscriptionsService.
+    // Also, ensure the mock return type matches the service's method signature.
 
     await TestBed.configureTestingModule({
       imports: [PlanListComponent, HttpClientTestingModule],
       providers: [
         {
-          provide: subscriptionPlanServiceMock,
-          useValue: subscriptionPlanServiceMock,
+          provide: PlansService, // Provide the actual PlansService
+          useValue: plansServiceMock, // Use the mock implementation
         },
       ],
     }).compileComponents();

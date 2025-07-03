@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://techsub-api-249568819447.us-central1.run.app",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

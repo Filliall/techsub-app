@@ -8,8 +8,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 
-import { PlanDto, SubscriptionDetailsDto } from '../../../api/models';
-import { SubscriptionsService } from '../../../api/services';
+import { PlanDto } from '../../../api/models';
+import { PlansService } from '../../../api/services';
 
 @Component({
   selector: 'app-plan-list',
@@ -26,12 +26,10 @@ import { SubscriptionsService } from '../../../api/services';
   styleUrls: ['./plan-list.component.scss'],
 })
 export class PlanListComponent implements OnInit {
-  plans$!: Observable<PlanDto[] | SubscriptionDetailsDto>;
-
-  constructor(private subscriptionPlanService: SubscriptionsService) {}
+  plans$!: Observable<PlanDto[]>;
+  constructor(private plansService: PlansService) {}
 
   ngOnInit(): void {
-    this.plans$ =
-      this.subscriptionPlanService.apiSubscriptionsCurrentGet$Json();
+    this.plans$ = this.plansService.apiPlansGet$Json();
   }
 }
