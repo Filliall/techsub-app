@@ -36,7 +36,10 @@ export class SubscriptionsService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiSubscriptionsPost$Response(params?: ApiSubscriptionsPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  apiSubscriptionsPost$Response(
+    params?: ApiSubscriptionsPost$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<void>> {
     return apiSubscriptionsPost(this.http, this.rootUrl, params, context);
   }
 
@@ -46,14 +49,18 @@ export class SubscriptionsService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiSubscriptionsPost(params?: ApiSubscriptionsPost$Params, context?: HttpContext): Observable<void> {
+  apiSubscriptionsPost(
+    params?: ApiSubscriptionsPost$Params,
+    context?: HttpContext
+  ): Observable<void> {
     return this.apiSubscriptionsPost$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
   /** Path part for operation `apiSubscriptionsIdCancelPost()` */
-  static readonly ApiSubscriptionsIdCancelPostPath = '/api/Subscriptions/{id}/cancel';
+  static readonly ApiSubscriptionsIdCancelPostPath =
+    '/api/Subscriptions/{id}/cancel';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -61,8 +68,16 @@ export class SubscriptionsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiSubscriptionsIdCancelPost$Response(params: ApiSubscriptionsIdCancelPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return apiSubscriptionsIdCancelPost(this.http, this.rootUrl, params, context);
+  apiSubscriptionsIdCancelPost$Response(
+    params: ApiSubscriptionsIdCancelPost$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<void>> {
+    return apiSubscriptionsIdCancelPost(
+      this.http,
+      this.rootUrl,
+      params,
+      context
+    );
   }
 
   /**
@@ -71,7 +86,10 @@ export class SubscriptionsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiSubscriptionsIdCancelPost(params: ApiSubscriptionsIdCancelPost$Params, context?: HttpContext): Observable<void> {
+  apiSubscriptionsIdCancelPost(
+    params: ApiSubscriptionsIdCancelPost$Params,
+    context?: HttpContext
+  ): Observable<void> {
     return this.apiSubscriptionsIdCancelPost$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
@@ -86,8 +104,16 @@ export class SubscriptionsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiSubscriptionsCurrentGet$Plain$Response(params?: ApiSubscriptionsCurrentGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SubscriptionDetailsDto>> {
-    return apiSubscriptionsCurrentGet$Plain(this.http, this.rootUrl, params, context);
+  apiSubscriptionsCurrentGet$Plain$Response(
+    params?: ApiSubscriptionsCurrentGet$Plain$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<SubscriptionDetailsDto>> {
+    return apiSubscriptionsCurrentGet$Plain(
+      this.http,
+      this.rootUrl,
+      params,
+      context
+    );
   }
 
   /**
@@ -96,9 +122,16 @@ export class SubscriptionsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiSubscriptionsCurrentGet$Plain(params?: ApiSubscriptionsCurrentGet$Plain$Params, context?: HttpContext): Observable<SubscriptionDetailsDto> {
+  apiSubscriptionsCurrentGet$Plain(
+    params?: ApiSubscriptionsCurrentGet$Plain$Params,
+    context?: HttpContext
+  ): Observable<SubscriptionDetailsDto> {
     return this.apiSubscriptionsCurrentGet$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SubscriptionDetailsDto>): SubscriptionDetailsDto => r.body)
+      map(
+        (
+          r: StrictHttpResponse<SubscriptionDetailsDto>
+        ): SubscriptionDetailsDto => r.body
+      )
     );
   }
 
@@ -108,8 +141,16 @@ export class SubscriptionsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiSubscriptionsCurrentGet$Json$Response(params?: ApiSubscriptionsCurrentGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SubscriptionDetailsDto>> {
-    return apiSubscriptionsCurrentGet$Json(this.http, this.rootUrl, params, context);
+  apiSubscriptionsCurrentGet$Json$Response(
+    params?: ApiSubscriptionsCurrentGet$Json$Params,
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<SubscriptionDetailsDto>> {
+    return apiSubscriptionsCurrentGet$Json(
+      this.http,
+      this.rootUrl,
+      params,
+      context
+    );
   }
 
   /**
@@ -118,10 +159,16 @@ export class SubscriptionsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiSubscriptionsCurrentGet$Json(params?: ApiSubscriptionsCurrentGet$Json$Params, context?: HttpContext): Observable<SubscriptionDetailsDto> {
+  apiSubscriptionsCurrentGet$Json(
+    params?: ApiSubscriptionsCurrentGet$Json$Params,
+    context?: HttpContext
+  ): Observable<SubscriptionDetailsDto> {
     return this.apiSubscriptionsCurrentGet$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SubscriptionDetailsDto>): SubscriptionDetailsDto => r.body)
+      map(
+        (
+          r: StrictHttpResponse<SubscriptionDetailsDto>
+        ): SubscriptionDetailsDto => r.body
+      )
     );
   }
-
 }
