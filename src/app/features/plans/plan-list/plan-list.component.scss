@@ -1,0 +1,38 @@
+.plan-list-container {
+  text-align: center;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.mat-card-actions {
+  margin-top: auto; /* Pushes the button to the bottom */
+  padding: 16px !important;
+  button {
+    width: 100%;
+  }
+}
+
+.price-section {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  .price {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  .period {
+    margin-left: 0.5rem;
+    color: #666;
+  }
+}

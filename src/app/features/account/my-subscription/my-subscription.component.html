@@ -1,0 +1,27 @@
+<mat-card *ngIf="subscription$ | async as sub; else loadingOrEmpty">
+  <mat-card-title>Minha Assinatura</mat-card-title>
+  <mat-card-content>
+    <div class="info-row">
+      <strong>Plano:</strong>
+      <span>{{ sub.planName }}</span>
+    </div>
+    <div class="info-row">
+      <strong>Status:</strong>
+      <span class="status" [ngClass]="sub.status?.toLowerCase()">{{
+        sub.status
+      }}</span>
+    </div>
+    <div class="info-row">
+      <strong>Data de Renovação:</strong>
+      <span>{{ sub.endDate | date : "dd/MM/yyyy" }}</span>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="warn">Cancelar Assinatura</button>
+  </mat-card-actions>
+</mat-card>
+
+<ng-template #loadingOrEmpty>
+  <!-- Adicionar lógica para diferenciar loading de "sem assinatura" -->
+  <p>Você ainda não possui uma assinatura ativa.</p>
+</ng-template>

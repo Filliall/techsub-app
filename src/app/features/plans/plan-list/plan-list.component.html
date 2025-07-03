@@ -1,0 +1,35 @@
+<div class="plan-list-container">
+  <h1>Nossos Planos</h1>
+  <p>Escolha o plano que melhor se adapta às suas necessidades.</p>
+
+  <div *ngIf="plans$ | async as plans; else loading" class="plans-grid">
+    <mat-card *ngFor="let plan of plans" class="plan-card">
+      <mat-card-header>
+        <mat-card-title>{{ plan.name }}</mat-card-title>
+        <mat-card-subtitle>{{
+          plan.isTrialEligible ? "Trial de 7 dias disponível" : " "
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="price-section">
+          <span class="price">{{ plan.monthlyPrice | currency : "BRL" }}</span>
+          <span class="period">/mês</span>
+        </div>
+        <p class="description">{{ plan.description }}</p>
+        <!-- Você pode adicionar uma lista de features aqui -->
+        <!-- <mat-list>
+          <mat-list-item>Feature 1</mat-list-item>
+        </mat-list> -->
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Assinar Agora</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #loading>
+    <div class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+</div>
