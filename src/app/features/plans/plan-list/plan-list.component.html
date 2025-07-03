@@ -23,7 +23,21 @@
         </mat-list>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary">Assinar Agora</button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="subscribe-button"
+          [disabled]="loadingPlanId !== null"
+          (click)="subscribeToPlan(plan.id!)"
+        >
+          <span *ngIf="loadingPlanId !== plan.id?.toString()"
+            >Assinar Agora</span
+          >
+          <mat-spinner
+            *ngIf="loadingPlanId === plan.id?.toString()"
+            diameter="24"
+          ></mat-spinner>
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>

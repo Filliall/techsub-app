@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { Observable, finalize } from 'rxjs';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,7 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 
 import { PlanDto } from '../../../api/models';
-import { PlansService } from '../../../api/services';
+import { PlansService, SubscriptionsService } from '../../../api/services';
 
 @Component({
   selector: 'app-plan-list',
@@ -21,15 +23,47 @@ import { PlansService } from '../../../api/services';
     MatProgressSpinnerModule,
     MatListModule,
     MatIconModule,
+    CurrencyPipe,
   ],
   templateUrl: './plan-list.component.html',
   styleUrls: ['./plan-list.component.scss'],
 })
 export class PlanListComponent implements OnInit {
   plans$!: Observable<PlanDto[]>;
-  constructor(private plansService: PlansService) {}
+  loadingPlanId: string | null = null;
+
+  constructor(
+    private plansService: PlansService,
+    private subscriptionsService: SubscriptionsService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.plans$ = this.plansService.apiPlansGet$Json();
+  }
+
+  subscribeToPlan(planId: number): void {
+    if (this.loadingPlanId) return;
+
+    this.loadingPlanId = planId.toString();
+
+    this.subscriptionsService
+      .apiSubscriptionsPost({ body: { planId } })
+      .pipe(finalize(() => (this.loadingPlanId = null)))
+      .subscribe({
+        next: () => {
+          this.snackBar.open('Inscrição realizada com sucesso!', 'Fechar', {
+            duration: 5000,
+          });
+          this.router.navigate(['/my-subscription']);
+        },
+        error: (err) => {
+          this.snackBar.open(
+            'Falha ao realizar a inscrição. Tente novamente.',
+            'Fechar'
+          );
+        },
+      });
   }
 }
