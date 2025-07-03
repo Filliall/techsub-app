@@ -7,7 +7,7 @@
       <mat-card-header>
         <mat-card-title>{{ plan.name }}</mat-card-title>
         <mat-card-subtitle>{{
-          plan.isTrialEligible ? "Trial de 7 dias disponível" : " "
+          plan.allowsTrial ? "Trial de 7 dias disponível" : " "
         }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
@@ -15,7 +15,6 @@
           <span class="price">{{ plan.monthlyPrice | currency : "BRL" }}</span>
           <span class="period">/mês</span>
         </div>
-        <p class="description">{{ plan.description }}</p>
         <!-- Você pode adicionar uma lista de features aqui -->
         <!-- <mat-list>
           <mat-list-item>Feature 1</mat-list-item>

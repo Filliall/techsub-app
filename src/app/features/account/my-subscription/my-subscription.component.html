@@ -22,6 +22,12 @@
 </mat-card>
 
 <ng-template #loadingOrEmpty>
-  <!-- Adicionar lógica para diferenciar loading de "sem assinatura" -->
-  <p>Você ainda não possui uma assinatura ativa.</p>
+  <mat-card>
+    <mat-card-content>
+      <p>
+        Você ainda não possui uma assinatura ativa ou os dados estão carregando.
+      </p>
+      <a mat-button routerLink="/plans">Ver Planos</a>
+    </mat-card-content>
+  </mat-card>
 </ng-template>

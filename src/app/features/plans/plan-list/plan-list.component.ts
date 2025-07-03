@@ -6,8 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { SubscriptionPlan } from 'src/app/api/models';
-import { SubscriptionPlanService } from 'src/app/api/services';
+import { PlanDto } from '../../../api/models';
+import { SubscriptionsService } from '../../../api/services';
 
 @Component({
   selector: 'app-plan-list',
@@ -22,11 +22,14 @@ import { SubscriptionPlanService } from 'src/app/api/services';
   styleUrls: ['./plan-list.component.scss'],
 })
 export class PlanListComponent implements OnInit {
-  plans$: Observable<SubscriptionPlan[]>;
+  plans$: Observable<PlanDto[]> | undefined;
 
-  constructor(private planService: SubscriptionPlanService) {}
+  constructor(private planService: SubscriptionsService) {}
 
   ngOnInit(): void {
-    this.plans$ = this.planService.apiSubscriptionPlanGet$Json();
+    this.plans$ =
+      this.planService.apiSubscriptionsCurrentGet$Json() as Observable<
+        PlanDto[]
+      >;
   }
 }

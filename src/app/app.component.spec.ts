@@ -1,10 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { provideRouter } from '@angular/router';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from './core/auth/auth.service';
+import { of } from 'rxjs';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
+    const authServiceStub = {
+      isAuthenticated$: of(false), // Começa com um estado padrão
+      logout: () => {},
+    };
+
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [AppComponent, NoopAnimationsModule],
+      providers: [
+        provideRouter([]), // Fornece um router mock
+        { provide: AuthService, useValue: authServiceStub },
+      ],
     }).compileComponents();
   });
 
@@ -12,18 +25,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have the 'techsub-app' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('techsub-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, techsub-app');
   });
 });

@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { AuthService as ApiAuthService } from 'src/app/api/services';
+import { AuthService as ApiAuthService } from '../../../api/services';
 
 @Component({
   selector: 'app-register',
