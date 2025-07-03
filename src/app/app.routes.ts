@@ -1,7 +1,12 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { HomeComponent } from './features/home/home.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+  },
   // Rotas públicas de autenticação (renderizadas sem o layout principal)
   {
     path: 'auth',
@@ -20,14 +25,12 @@ export const routes: Routes = [
             (c) => c.RegisterComponent
           ),
       },
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
 
   // Rotas privadas (renderizadas dentro do layout principal e protegidas pelo AuthGuard)
   {
     path: '',
-    canActivate: [authGuard],
     children: [
       {
         path: 'plans',
@@ -44,7 +47,7 @@ export const routes: Routes = [
           ).then((c) => c.MySubscriptionComponent),
       },
       // Adicione a rota de relatórios quando o componente estiver pronto
-      // { path: 'reports', loadComponent: () => import('./features/reports/reports.component').then(c => c.ReportsComponent) },
+      { path: 'reports', loadComponent: () => import('./features/reports/reports.component').then(c => c.ReportsComponent) },
       { path: '', redirectTo: 'plans', pathMatch: 'full' }, // Rota padrão após o login
     ],
   },
