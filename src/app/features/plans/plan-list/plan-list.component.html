@@ -15,10 +15,12 @@
           <span class="price">{{ plan.monthlyPrice | currency : "BRL" }}</span>
           <span class="period">/mês</span>
         </div>
-        <!-- Você pode adicionar uma lista de features aqui -->
-        <!-- <mat-list>
-          <mat-list-item>Feature 1</mat-list-item>
-        </mat-list> -->
+        <mat-list *ngIf="plan.features && plan.features.length > 0">
+          <mat-list-item *ngFor="let feature of plan.features">
+            <mat-icon matListItemIcon>check</mat-icon>
+            {{ feature }}
+          </mat-list-item>
+        </mat-list>
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary">Assinar Agora</button>
