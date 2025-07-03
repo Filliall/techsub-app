@@ -33,7 +33,9 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
+    const token = localStorage.getItem(TOKEN_KEY);
+    console.log('AuthService getToken() returned:', token);
+    return token;
   }
 
   isLoggedIn(): boolean {
